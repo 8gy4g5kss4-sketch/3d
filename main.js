@@ -131,7 +131,7 @@ function bootstrap() {
   }
 
   /* Camera */
-  camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 120);
+  camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 120);
   camera.position.copy(CAMERA_DEFAULT);
   camera.lookAt(CAMERA_TARGET);
 
@@ -154,7 +154,7 @@ function buildEnvironment() {
   const floorGeo  = new THREE.PlaneGeometry(80, 80, 80, 80);
   const floorMat  = new THREE.MeshStandardMaterial({
     color: new THREE.Color(0x0e0b08),
-    roughness: 0.15,
+    roughness: 0.10,
     metalness: 0.08,
     envMapIntensity: 0.3,
   });
