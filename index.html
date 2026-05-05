@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lumière — Luxury Digital Showroom</title>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <canvas id="canvas"></canvas>
+
+  <div id="ui-root">
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+
+    <div id="brand">
+      <div id="brand-name">LUMIÈRE</div>
+      <div id="brand-tagline">private atelier</div>
+    </div>
+
+    <div id="collection-label">
+      <span>Collection · 2024</span>
+    </div>
+
+    <div id="nav-hint">
+      <p>drag · explore<br/>scroll · approach<br/>click · reveal</p>
+    </div>
+
+    <div id="ambient-dots">
+      <div class="ambient-dot"></div>
+      <div class="ambient-dot"></div>
+      <div class="ambient-dot"></div>
+      <div class="ambient-dot"></div>
+    </div>
+
+    <div id="piece-counter">
+      <span></span>
+    </div>
+  </div>
+
+  <div id="product-panel">
+    <button id="panel-close"></button>
+    <div id="panel-number"></div>
+    <div id="panel-name"></div>
+    <div id="panel-origin"></div>
+    <div id="panel-divider"></div>
+    <div id="panel-description"></div>
+    <div id="panel-material"></div>
+    <a id="request-btn" href="#" target="_blank">Request this piece</a>
+  </div>
+
+  <div id="intro-veil">
+    <div id="intro-logo">LUMIÈRE</div>
+    <div id="intro-sub">private showroom</div>
+    <div id="intro-line"></div>
+    <button id="enter-btn">Enter</button>
+  </div>
+
+  <div id="loading-bar-wrap">
+    <div id="loading-bar"></div>
+  </div>
+
+  <div id="guide-line"></div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module" src="main.js"></script>
+
+</body>
+</html>

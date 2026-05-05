@@ -1,0 +1,487 @@
+/* ============================================================
+   LUMIÈRE — LUXURY DIGITAL SHOWROOM
+   Stylesheet: Typography, UI Overlays, Cinematic Interface
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@200;300;400&display=swap');
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --gold:        #c9a96e;
+  --gold-light:  #e8d5a3;
+  --gold-dim:    rgba(201, 169, 110, 0.15);
+  --ivory:       #f5f0e8;
+  --charcoal:    #0a0907;
+  --dark-brown:  #110e0a;
+  --panel-bg:    rgba(10, 9, 7, 0.72);
+  --blur:        saturate(180%) blur(20px);
+  --ease-luxury: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--charcoal);
+  cursor: none;
+}
+
+/* ── Canvas ── */
+#canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0; left: 0;
+}
+
+/* ── Custom Cursor ── */
+#cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s var(--ease-luxury),
+              width 0.3s var(--ease-luxury),
+              height 0.3s var(--ease-luxury),
+              background 0.3s;
+  mix-blend-mode: screen;
+}
+
+#cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(201, 169, 110, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.18s var(--ease-luxury),
+              width 0.4s var(--ease-luxury),
+              height 0.4s var(--ease-luxury),
+              border-color 0.3s,
+              opacity 0.3s;
+}
+
+body.hovering #cursor {
+  width: 12px;
+  height: 12px;
+  background: var(--gold-light);
+}
+
+body.hovering #cursor-ring {
+  width: 56px;
+  height: 56px;
+  border-color: var(--gold);
+}
+
+/* ── Brand Mark (top left) ── */
+#brand {
+  position: fixed;
+  top: 44px;
+  left: 52px;
+  z-index: 100;
+  opacity: 0;
+  animation: fadeIn 2.4s 1.2s var(--ease-luxury) forwards;
+}
+
+#brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 22px;
+  letter-spacing: 0.35em;
+  color: var(--ivory);
+  text-transform: uppercase;
+}
+
+#brand-tagline {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── Collection Label (top right) ── */
+#collection-label {
+  position: fixed;
+  top: 44px;
+  right: 52px;
+  z-index: 100;
+  text-align: right;
+  opacity: 0;
+  animation: fadeIn 2.4s 1.6s var(--ease-luxury) forwards;
+}
+
+#collection-label span {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+/* ── Piece counter ── */
+#piece-counter {
+  position: fixed;
+  bottom: 44px;
+  right: 52px;
+  z-index: 100;
+  opacity: 0;
+  animation: fadeIn 2.4s 2s var(--ease-luxury) forwards;
+}
+
+#piece-counter span {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: rgba(245, 240, 232, 0.35);
+}
+
+/* ── Navigation hint ── */
+#nav-hint {
+  position: fixed;
+  bottom: 44px;
+  left: 52px;
+  z-index: 100;
+  opacity: 0;
+  animation: fadeIn 2.4s 2.4s var(--ease-luxury) forwards;
+}
+
+#nav-hint p {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: rgba(245, 240, 232, 0.25);
+  text-transform: uppercase;
+  line-height: 1.8;
+}
+
+/* ── Intro Veil ── */
+#intro-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: var(--charcoal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  transition: opacity 1.8s var(--ease-luxury);
+}
+
+#intro-veil.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#intro-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(36px, 6vw, 72px);
+  letter-spacing: 0.5em;
+  color: var(--ivory);
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: riseIn 1.4s 0.4s var(--ease-luxury) forwards;
+}
+
+#intro-sub {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 10px;
+  letter-spacing: 0.7em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-top: 18px;
+  opacity: 0;
+  animation: riseIn 1.4s 0.9s var(--ease-luxury) forwards;
+}
+
+#intro-line {
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  margin-top: 36px;
+  animation: expandLine 1.2s 1.4s var(--ease-luxury) forwards;
+}
+
+#enter-btn {
+  margin-top: 48px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 0.6em;
+  color: rgba(245, 240, 232, 0.5);
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: none;
+  padding: 16px 32px;
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  transition: color 0.6s, border-color 0.6s, background 0.6s;
+  opacity: 0;
+  animation: riseIn 1.4s 2s var(--ease-luxury) forwards;
+}
+
+#enter-btn:hover {
+  color: var(--gold-light);
+  border-color: rgba(201, 169, 110, 0.6);
+  background: rgba(201, 169, 110, 0.04);
+}
+
+/* ── Product Detail Panel ── */
+#product-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: min(400px, 90vw);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 52px;
+  background: var(--panel-bg);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  border-left: 1px solid rgba(201, 169, 110, 0.12);
+  transform: translateX(100%);
+  transition: transform 1s var(--ease-luxury), opacity 0.8s var(--ease-luxury);
+  opacity: 0;
+}
+
+#product-panel.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+#panel-close {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  background: none;
+  border: none;
+  cursor: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#panel-close::before,
+#panel-close::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 1px;
+  background: rgba(245, 240, 232, 0.4);
+  transition: background 0.3s;
+}
+#panel-close::before { transform: rotate(45deg); }
+#panel-close::after  { transform: rotate(-45deg); }
+#panel-close:hover::before,
+#panel-close:hover::after { background: var(--gold); }
+
+#panel-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+
+#panel-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(28px, 3.5vw, 42px);
+  line-height: 1.15;
+  color: var(--ivory);
+  margin-bottom: 12px;
+}
+
+#panel-origin {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 36px;
+}
+
+#panel-divider {
+  width: 40px;
+  height: 1px;
+  background: rgba(201, 169, 110, 0.3);
+  margin-bottom: 36px;
+}
+
+#panel-description {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(245, 240, 232, 0.65);
+  margin-bottom: 48px;
+}
+
+#panel-material {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: rgba(245, 240, 232, 0.3);
+  text-transform: uppercase;
+  margin-bottom: 52px;
+  line-height: 2;
+}
+
+#request-btn {
+  display: inline-block;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 0.55em;
+  color: var(--charcoal);
+  text-transform: uppercase;
+  background: var(--gold);
+  border: none;
+  padding: 18px 32px;
+  text-decoration: none;
+  cursor: none;
+  transition: background 0.5s, color 0.5s, transform 0.4s var(--ease-luxury);
+  text-align: center;
+}
+
+#request-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+}
+
+/* ── Ambient particle indicator (bottom center) ── */
+#ambient-dots {
+  position: fixed;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+  opacity: 0;
+  animation: fadeIn 2s 2.8s ease forwards;
+}
+
+.ambient-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(201, 169, 110, 0.2);
+  transition: background 0.5s, transform 0.5s;
+  cursor: none;
+}
+
+.ambient-dot.active {
+  background: var(--gold);
+  transform: scale(1.3);
+}
+
+/* ── Loading bar ── */
+#loading-bar-wrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(201, 169, 110, 0.08);
+  z-index: 600;
+  transition: opacity 1s;
+}
+
+#loading-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transition: width 0.4s var(--ease-luxury);
+}
+
+/* ── Scroll guide line ── */
+#guide-line {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  width: 1px;
+  height: 0;
+  background: linear-gradient(to top, rgba(201,169,110,0.3), transparent);
+  z-index: 50;
+  animation: guidePulse 3s 3s ease-in-out infinite;
+}
+
+/* ── Keyframes ── */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes riseIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes expandLine {
+  to { width: 80px; }
+}
+
+@keyframes guidePulse {
+  0%   { height: 0;   opacity: 0; }
+  40%  { height: 60px; opacity: 1; }
+  100% { height: 0;   opacity: 0; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  #brand { top: 28px; left: 24px; }
+  #brand-name { font-size: 17px; letter-spacing: 0.25em; }
+  #collection-label { top: 28px; right: 24px; }
+  #piece-counter, #nav-hint { display: none; }
+
+  #product-panel {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    height: auto;
+    max-height: 65vh;
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid rgba(201, 169, 110, 0.12);
+    transform: translateY(100%);
+    padding: 44px 32px 40px;
+  }
+
+  #product-panel.visible {
+    transform: translateY(0);
+  }
+
+  #ambient-dots { display: none; }
+}
